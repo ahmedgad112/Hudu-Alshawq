@@ -270,7 +270,7 @@ button { cursor: pointer; }
 h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.35; margin: 0; }
 .hero h1 {
   font-size: clamp(2.3rem, 4.6vw, 4.15rem);
-  max-width: 14ch;
+  max-width: 11em;
 }
 .lead {
   font-size: 1.18rem;
@@ -518,6 +518,25 @@ input, select {
   font-size: 1.35rem;
   color: var(--ink);
 }
+
+.faq-list { display: grid; gap: 0.75rem; }
+.faq-list details {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 0.95rem 1.15rem;
+  box-shadow: var(--shadow);
+}
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.05rem;
+  list-style: none;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list details p { margin: 0.55rem 0 0.15rem; color: var(--ink-soft); }
+.faq-list a { color: var(--gold-deep); font-weight: 700; }
+address { font-style: normal; }
 
 /* Footer */
 footer {

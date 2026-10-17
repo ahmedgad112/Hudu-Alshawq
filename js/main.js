@@ -33,8 +33,6 @@ const specialists = [
   { name: "مصرية", letter: "ص" }
 ];
 
-const serviceGrid = document.getElementById("serviceGrid");
-const specialistGrid = document.getElementById("specialistGrid");
 const serviceSelect = document.getElementById("service");
 const nationalitySelect = document.getElementById("nationality");
 const preview = document.getElementById("preview");
@@ -48,19 +46,6 @@ services.forEach((service) => {
   option.value = label;
   option.textContent = label;
   serviceSelect.appendChild(option);
-
-  const card = document.createElement("article");
-  card.className = "tilt-card reveal";
-  card.innerHTML = `
-    <div class="card-icon"><i class="fa-solid ${service.icon}" aria-hidden="true"></i></div>
-    <h3>${service.title}</h3>
-    <p>${service.text}</p>
-    <div class="card-actions">
-      <a class="btn btn-gold btn-sm" href="${waLink(serviceMessage(label))}" target="_blank" rel="noopener noreferrer">
-        <i class="fa-brands fa-whatsapp"></i> اطلب الخدمة عبر واتساب
-      </a>
-    </div>`;
-  serviceGrid.appendChild(card);
 });
 
 specialists.forEach((person) => {
@@ -68,24 +53,11 @@ specialists.forEach((person) => {
   option.value = person.name;
   option.textContent = `أخصائية ${person.name}`;
   nationalitySelect.appendChild(option);
-
-  const card = document.createElement("button");
-  card.type = "button";
-  card.className = "tilt-card specialist reveal";
-  card.dataset.nationality = person.name;
-  card.setAttribute("aria-pressed", "false");
-  card.innerHTML = `
-    <span class="mono" aria-hidden="true">${person.letter}</span>
-    <h3>أخصائية ${person.name}</h3>
-    <small>جلسة مساج لمدة ساعة</small>
-    <span class="pick-label">اختيار للحجز</span>`;
-  card.addEventListener("click", () => selectSpecialist(person.name));
-  specialistGrid.appendChild(card);
 });
 
-function serviceMessage(serviceName) {
-  return `السلام عليكم، أرغب بطلب خدمة: ${serviceName} من مؤسسة هدوء الشوق. أرجو تزويدي بالتفاصيل وترتيب الموعد.`;
-}
+document.querySelectorAll(".specialist").forEach((card) => {
+  card.addEventListener("click", () => selectSpecialist(card.dataset.nationality));
+});
 
 function waLink(text) {
   return `https://wa.me/${PHONE_WA}?text=${encodeURIComponent(text)}`;
